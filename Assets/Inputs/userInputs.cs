@@ -35,6 +35,15 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""shotConfirm"",
+                    ""type"": ""Value"",
+                    ""id"": ""4abb9c26-58c6-4a8e-a556-d9f042cf1526"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -57,6 +66,17 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""shotDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a166db7-8c58-4216-a764-c51e9d626598"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""shotConfirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -129,6 +149,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
         // User
         m_User = asset.FindActionMap("User", throwIfNotFound: true);
         m_User_shotDir = m_User.FindAction("shotDir", throwIfNotFound: true);
+        m_User_shotConfirm = m_User.FindAction("shotConfirm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -191,11 +212,13 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_User;
     private List<IUserActions> m_UserActionsCallbackInterfaces = new List<IUserActions>();
     private readonly InputAction m_User_shotDir;
+    private readonly InputAction m_User_shotConfirm;
     public struct UserActions
     {
         private @UserInputs m_Wrapper;
         public UserActions(@UserInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @shotDir => m_Wrapper.m_User_shotDir;
+        public InputAction @shotConfirm => m_Wrapper.m_User_shotConfirm;
         public InputActionMap Get() { return m_Wrapper.m_User; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +231,9 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
             @shotDir.started += instance.OnShotDir;
             @shotDir.performed += instance.OnShotDir;
             @shotDir.canceled += instance.OnShotDir;
+            @shotConfirm.started += instance.OnShotConfirm;
+            @shotConfirm.performed += instance.OnShotConfirm;
+            @shotConfirm.canceled += instance.OnShotConfirm;
         }
 
         private void UnregisterCallbacks(IUserActions instance)
@@ -215,6 +241,9 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
             @shotDir.started -= instance.OnShotDir;
             @shotDir.performed -= instance.OnShotDir;
             @shotDir.canceled -= instance.OnShotDir;
+            @shotConfirm.started -= instance.OnShotConfirm;
+            @shotConfirm.performed -= instance.OnShotConfirm;
+            @shotConfirm.canceled -= instance.OnShotConfirm;
         }
 
         public void RemoveCallbacks(IUserActions instance)
@@ -280,5 +309,6 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
     public interface IUserActions
     {
         void OnShotDir(InputAction.CallbackContext context);
+        void OnShotConfirm(InputAction.CallbackContext context);
     }
 }
