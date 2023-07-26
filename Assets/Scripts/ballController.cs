@@ -35,18 +35,18 @@ public class ballController : MonoBehaviour {
     }
 
     private void Update() {
-        getInputs();
+        GetInputs();
 
-        shotVector = getShotVector();
+        shotVector = GetShotVector();
 
         Debug.Log(shotVector);
     }
 
-    private void getInputs() {
+    private void GetInputs() {
         shotDir = mainCamera.ScreenToWorldPoint(userInputs.User.shotDir.ReadValue<Vector2>());
     }
 
-    private Vector2 getShotVector() {
+    private Vector2 GetShotVector() {
         float shotVectorLength;
         Vector2 currShotVector;
         // get vector from ball pos to mouse pos
