@@ -18,7 +18,7 @@
                     "name": "shotConfirm",
                     "type": "Value",
                     "id": "4abb9c26-58c6-4a8e-a556-d9f042cf1526",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true

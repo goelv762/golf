@@ -4,10 +4,11 @@ public class ballController : MonoBehaviour {
 
     [Header("Ball Components")]
     [SerializeField] private Rigidbody2D ballRB;
+    [SerializeField] private float minPower, maxPower;
+    [SerializeField] private float speedMulti;
 
-    [Header("Ball attributes")]
-    [SerializeField] private float speed;
-    [SerializeField] private float maxPower;
+    [Header("Input attributes")]
+    [SerializeField] private float inputBuffer;
 
     [Header("Other")]
     [SerializeField] private Camera mainCamera;
@@ -15,19 +16,25 @@ public class ballController : MonoBehaviour {
     // stores mouse position
     private Vector2 shotDir;
 
+    // stores the value for the confirmation of shot
+    private float shotConfirm;
+    // stores last shotConfirm val to make sure player cant hold down shot
+    private float prevShotConfirm;
+
+
     // stores vector for shot vector
     private Vector2 shotVector;
+    // stores shot length for speed
+    private float shotVectorLength;
 
     // used to get inputs (e.g. mouse: pos, clicking)
     private UserInputs userInputs;
     private void Awake() {
-
         userInputs = new UserInputs();
     }
 
     private void OnEnable() {
         userInputs.Enable();
-        
     }
 
     private void OnDisable() {
@@ -39,15 +46,20 @@ public class ballController : MonoBehaviour {
 
         shotVector = GetShotVector();
 
-        Debug.Log(shotVector);
+        // hitting ball
+        if (shotConfirm > inputBuffer && prevShotConfirm != 1f) { 
+            HitBall(); 
+        }
+
+        prevShotConfirm = shotConfirm;
     }
 
     private void GetInputs() {
         shotDir = mainCamera.ScreenToWorldPoint(userInputs.User.shotDir.ReadValue<Vector2>());
+        shotConfirm = userInputs.User.shotConfirm.ReadValue<float>();
     }
 
     private Vector2 GetShotVector() {
-        float shotVectorLength;
         Vector2 currShotVector;
         // get vector from ball pos to mouse pos
         currShotVector.x = shotDir.x - transform.position.x;
@@ -60,5 +72,10 @@ public class ballController : MonoBehaviour {
 
         // normalise the vector
         return currShotVector / shotVectorLength;
+    }
+
+    private void HitBall() {
+        ballRB.AddForce(shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
+
     }
 }
