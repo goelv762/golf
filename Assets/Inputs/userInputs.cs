@@ -28,7 +28,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
             ""id"": ""11b6c9de-b86a-4aba-9d5d-695f9ce72b97"",
             ""actions"": [
                 {
-                    ""name"": ""shotDir"",
+                    ""name"": ""shotPos"",
                     ""type"": ""Value"",
                     ""id"": ""f3c8f26c-366b-46b5-bef1-ebb41a859fb4"",
                     ""expectedControlType"": ""Vector2"",
@@ -37,7 +37,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""shotConfirm"",
+                    ""name"": ""shotActivate"",
                     ""type"": ""Value"",
                     ""id"": ""4abb9c26-58c6-4a8e-a556-d9f042cf1526"",
                     ""expectedControlType"": ""Analog"",
@@ -54,7 +54,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""shotDir"",
+                    ""action"": ""shotPos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -65,7 +65,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""shotDir"",
+                    ""action"": ""shotPos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -76,7 +76,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""shotConfirm"",
+                    ""action"": ""shotActivate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -148,8 +148,8 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
 }");
         // User
         m_User = asset.FindActionMap("User", throwIfNotFound: true);
-        m_User_shotDir = m_User.FindAction("shotDir", throwIfNotFound: true);
-        m_User_shotConfirm = m_User.FindAction("shotConfirm", throwIfNotFound: true);
+        m_User_shotPos = m_User.FindAction("shotPos", throwIfNotFound: true);
+        m_User_shotActivate = m_User.FindAction("shotActivate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -211,14 +211,14 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
     // User
     private readonly InputActionMap m_User;
     private List<IUserActions> m_UserActionsCallbackInterfaces = new List<IUserActions>();
-    private readonly InputAction m_User_shotDir;
-    private readonly InputAction m_User_shotConfirm;
+    private readonly InputAction m_User_shotPos;
+    private readonly InputAction m_User_shotActivate;
     public struct UserActions
     {
         private @UserInputs m_Wrapper;
         public UserActions(@UserInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @shotDir => m_Wrapper.m_User_shotDir;
-        public InputAction @shotConfirm => m_Wrapper.m_User_shotConfirm;
+        public InputAction @shotPos => m_Wrapper.m_User_shotPos;
+        public InputAction @shotActivate => m_Wrapper.m_User_shotActivate;
         public InputActionMap Get() { return m_Wrapper.m_User; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -228,22 +228,22 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UserActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UserActionsCallbackInterfaces.Add(instance);
-            @shotDir.started += instance.OnShotDir;
-            @shotDir.performed += instance.OnShotDir;
-            @shotDir.canceled += instance.OnShotDir;
-            @shotConfirm.started += instance.OnShotConfirm;
-            @shotConfirm.performed += instance.OnShotConfirm;
-            @shotConfirm.canceled += instance.OnShotConfirm;
+            @shotPos.started += instance.OnShotPos;
+            @shotPos.performed += instance.OnShotPos;
+            @shotPos.canceled += instance.OnShotPos;
+            @shotActivate.started += instance.OnShotActivate;
+            @shotActivate.performed += instance.OnShotActivate;
+            @shotActivate.canceled += instance.OnShotActivate;
         }
 
         private void UnregisterCallbacks(IUserActions instance)
         {
-            @shotDir.started -= instance.OnShotDir;
-            @shotDir.performed -= instance.OnShotDir;
-            @shotDir.canceled -= instance.OnShotDir;
-            @shotConfirm.started -= instance.OnShotConfirm;
-            @shotConfirm.performed -= instance.OnShotConfirm;
-            @shotConfirm.canceled -= instance.OnShotConfirm;
+            @shotPos.started -= instance.OnShotPos;
+            @shotPos.performed -= instance.OnShotPos;
+            @shotPos.canceled -= instance.OnShotPos;
+            @shotActivate.started -= instance.OnShotActivate;
+            @shotActivate.performed -= instance.OnShotActivate;
+            @shotActivate.canceled -= instance.OnShotActivate;
         }
 
         public void RemoveCallbacks(IUserActions instance)
@@ -308,7 +308,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
     }
     public interface IUserActions
     {
-        void OnShotDir(InputAction.CallbackContext context);
-        void OnShotConfirm(InputAction.CallbackContext context);
+        void OnShotPos(InputAction.CallbackContext context);
+        void OnShotActivate(InputAction.CallbackContext context);
     }
 }

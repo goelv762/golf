@@ -14,12 +14,19 @@ public class ballController : MonoBehaviour {
     [SerializeField] private Camera mainCamera;
 
     // stores mouse position
-    private Vector2 shotDir;
+    private Vector2 shotPos;
+    private Vector2 rawshotPos;
 
     // stores the value for the confirmation of shot
-    private float shotConfirm;
-    // stores last shotConfirm val to make sure player cant hold down shot
-    private float prevShotConfirm;
+    private float shotActivate;
+    // stores last shotActivate val to make sure player cant hold down shot
+    private float prevshotActivate;
+
+    // stores wether the mouse is above the ball
+    private bool isOverBall;
+
+    // stores weather there is a shot currently active (e.g. pulling back to shoot)
+    private bool isShotActive;
 
 
     // stores vector for shot vector
@@ -46,24 +53,34 @@ public class ballController : MonoBehaviour {
 
         shotVector = GetShotVector();
 
-        // hitting ball
-        if (shotConfirm > inputBuffer && prevShotConfirm != 1f) { 
-            HitBall(); 
+        if (shotActivate == 1f && isOverBall) { 
+            isShotActive = true; 
         }
 
-        prevShotConfirm = shotConfirm;
+        if (shotActivate == 0f && !isOverBall && isShotActive) { 
+            isShotActive = false;
+            HitBall();
+        }
+        
+
+        prevshotActivate = shotActivate;
     }
 
+    void OnMouseEnter() { isOverBall = true; }
+    void OnMouseExit() { isOverBall = false; }
+
     private void GetInputs() {
-        shotDir = mainCamera.ScreenToWorldPoint(userInputs.User.shotDir.ReadValue<Vector2>());
-        shotConfirm = userInputs.User.shotConfirm.ReadValue<float>();
+        rawshotPos = userInputs.User.shotPos.ReadValue<Vector2>();
+        shotActivate = userInputs.User.shotActivate.ReadValue<float>();
+
+        shotPos = mainCamera.ScreenToWorldPoint(rawshotPos);
     }
 
     private Vector2 GetShotVector() {
         Vector2 currShotVector;
         // get vector from ball pos to mouse pos
-        currShotVector.x = shotDir.x - transform.position.x;
-        currShotVector.y = shotDir.y - transform.position.y;
+        currShotVector.x = shotPos.x - transform.position.x;
+        currShotVector.y = shotPos.y - transform.position.y;
 
         // pythagoras theorem (finding hypotenuse of triangle)
         // c = √(a^2 + b^2)
@@ -75,7 +92,7 @@ public class ballController : MonoBehaviour {
     }
 
     private void HitBall() {
-        ballRB.AddForce(shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
+        ballRB.AddForce(-shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
 
     }
 }
