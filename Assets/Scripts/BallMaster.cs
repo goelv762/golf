@@ -62,7 +62,6 @@ public class ballController : MonoBehaviour {
             HitBall();
         }
         
-
         prevshotActivate = shotActivate;
     }
 
