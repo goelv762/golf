@@ -17,13 +17,8 @@ public class BallMaster : MonoBehaviour {
         userInputs = new UserInputs();
     }
 
-    private void OnEnable() {
-        userInputs.Enable();
-    }
-
-    private void OnDisable() {
-        userInputs.Disable();
-    }
+    private void OnEnable() { userInputs.Enable(); } 
+    private void OnDisable() { userInputs.Disable(); }
 
     private void Update() {
         GetInputs();
@@ -35,6 +30,4 @@ public class BallMaster : MonoBehaviour {
 
         shotPos = mainCamera.ScreenToWorldPoint(rawshotPos);
     }
-
-    
 }

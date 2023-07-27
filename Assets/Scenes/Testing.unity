@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 1127265110}
   - component: {fileID: 1127265116}
   - component: {fileID: 1127265114}
+  - component: {fileID: 1127265117}
   - component: {fileID: 1127265115}
   m_Layer: 0
   m_Name: Ball
@@ -341,7 +342,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -361,7 +362,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.11000001, y: 0.11000001, z: 0.11000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -378,11 +379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc0ee1721aa7ac498951f1cc6de78e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballRB: {fileID: 1127265111}
-  minPower: 0.1
-  maxPower: 5
-  speedMulti: 0.9
-  inputBuffer: 0.1
   mainCamera: {fileID: 519420031}
 --- !u!114 &1127265115
 MonoBehaviour:
@@ -448,7 +444,27 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 1
+--- !u!114 &1127265117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127265109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da7d56b349ee444baa04da71ecf2030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRB: {fileID: 1127265111}
+  minPower: 0.1
+  maxPower: 5
+  speedMulti: 3
+  inputBuffer: 0.1
+  ballRenderer: {fileID: 1127265112}
+  hoverColour: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
+  defaultColour: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

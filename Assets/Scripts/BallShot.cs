@@ -11,11 +11,10 @@ public class BallShot : MonoBehaviour
     [Header("Input attributes")]
     [SerializeField] private float inputBuffer;
 
-    
-
-    
-    // stores last shotActivate val to make sure player cant hold down shot
-    private float prevshotActivate;
+    [Header("Visual")]
+    [SerializeField] private Renderer ballRenderer;
+    [SerializeField] Color hoverColour;
+    [SerializeField] Color defaultColour;
 
     // stores wether the mouse is above the ball
     private bool isOverBall;
@@ -29,23 +28,18 @@ public class BallShot : MonoBehaviour
     // stores shot length for speed
     private float shotVectorLength;
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         shotVector = GetShotVector();
 
-        if (BallMaster.shotActivate == 1f && isOverBall) { 
-            isShotActive = true; 
+        if (CheckBallHit()) {
+            ballRB.AddForce(-shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
         }
 
-        if (BallMaster.shotActivate == 0f && !isOverBall && isShotActive) { 
-            isShotActive = false;
-            HitBall();
-        }
-        
-        prevshotActivate = BallMaster.shotActivate;
+        BallColour();
     }
 
-    void OnMouseEnter() { isOverBall = true; }
-    void OnMouseExit() { isOverBall = false; }
+    private void OnMouseEnter() { isOverBall = true; }
+    private void OnMouseExit() { isOverBall = false; }
 
     
 
@@ -64,7 +58,28 @@ public class BallShot : MonoBehaviour
         return currShotVector / shotVectorLength;
     }
 
-    private void HitBall() {
-        ballRB.AddForce(-shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
+    private bool CheckBallHit() {
+        // logic for click and drag shooting
+        // initial mouse down on ball
+        if (BallMaster.shotActivate == 1f && isOverBall) { 
+            isShotActive = true; 
+        }
+
+        // release
+        if (BallMaster.shotActivate == 0f && !isOverBall && isShotActive) { 
+            isShotActive = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    private void BallColour() {
+        if (isShotActive || isOverBall) {
+            ballRenderer.material.color = hoverColour;
+        } 
+        else {
+            ballRenderer.material.color = defaultColour;
+        }
     }
 }
