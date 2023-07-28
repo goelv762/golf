@@ -12,6 +12,7 @@ public class BallShot : MonoBehaviour
     [SerializeField] private float inputBuffer;
 
     [Header("Visual")]
+    [SerializeField] private GameObject arrowIndicator;
     [SerializeField] private Renderer ballRenderer;
     [SerializeField] Color hoverColour;
     [SerializeField] Color defaultColour;
@@ -23,42 +24,17 @@ public class BallShot : MonoBehaviour
     private bool isShotActive;
 
 
-    // stores vector for shot vector
-    private Vector2 shotVector;
-    // stores shot length for speed
-    private float shotVectorLength;
     // Update is called once per frame
     private void Update() {
-        shotVector = GetShotVector();
 
-        if (CheckBallHit()) {
-            ballRB.AddForce(-shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
-        }
-
+        BallHit();
         BallColour();
     }
 
     private void OnMouseEnter() { isOverBall = true; }
     private void OnMouseExit() { isOverBall = false; }
 
-    
-
-    private Vector2 GetShotVector() {
-        Vector2 currShotVector;
-        // get vector from ball pos to mouse pos
-        currShotVector.x = BallMaster.shotPos.x - transform.position.x;
-        currShotVector.y = BallMaster.shotPos.y - transform.position.y;
-
-        // pythagoras theorem (finding hypotenuse of triangle)
-        // c = √(a^2 + b^2)
-        // a = x, b = y
-        shotVectorLength = Mathf.Sqrt(Mathf.Pow(currShotVector.x, 2) + Mathf.Pow(currShotVector.y, 2));
-
-        // normalise the vector
-        return currShotVector / shotVectorLength;
-    }
-
-    private bool CheckBallHit() {
+    private void BallHit() {
         // logic for click and drag shooting
         // initial mouse down on ball
         if (BallMaster.shotActivate == 1f && isOverBall) { 
@@ -68,10 +44,12 @@ public class BallShot : MonoBehaviour
         // release
         if (BallMaster.shotActivate == 0f && !isOverBall && isShotActive) { 
             isShotActive = false;
-            return true;
+            ballRB.AddForce(-BallMaster.shotVector * BallMaster.shotVectorLength * speedMulti, ForceMode2D.Impulse);
         }
-
-        return false;
+    }
+    
+    private void ShotIndicator() {
+        Instantiate(arrowIndicator, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     private void BallColour() {
