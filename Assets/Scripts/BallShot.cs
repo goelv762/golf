@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BallShot : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class BallShot : MonoBehaviour
     // stores weather there is a shot currently active (e.g. pulling back to shoot)
     private bool isShotActive;
 
+    // stores all the shot indicators
+    private List<GameObject> arrowIndicators = new List<GameObject>();
+
 
     // Update is called once per frame
     private void Update() {
@@ -45,11 +49,26 @@ public class BallShot : MonoBehaviour
         if (BallMaster.shotActivate == 0f && !isOverBall && isShotActive) { 
             isShotActive = false;
             ballRB.AddForce(-BallMaster.shotVector * BallMaster.shotVectorLength * speedMulti, ForceMode2D.Impulse);
+            ShotIndicator();
         }
     }
     
     private void ShotIndicator() {
-        Instantiate(arrowIndicator, new Vector3(0, 0, 0), Quaternion.identity);
+        
+        int arraySize = arrowIndicators.Count;
+
+        if (arraySize != Mathf.Round(BallMaster.shotVectorLength)) {
+            for (int i = 0; i < arraySize; i++) {
+                Debug.Log(i);
+                arrowIndicators.Add(Instantiate(arrowIndicator));
+            }
+            // Debug.Log(Mathf.Round(BallMaster.shotVectorLength) + " | " + arraySize);
+        }
+
+        
+        // for (int i = 0; i < arraySize; i++) {
+        //     arrowIndicators[i].transform.position = transform.position;
+        // }
     }
 
     private void BallColour() {
