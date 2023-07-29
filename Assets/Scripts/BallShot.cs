@@ -132,8 +132,11 @@ public class BallShot : MonoBehaviour
         // checks if there is not an active shot and the indicator is still showing
         else if (!BallMaster.isShotActive && isIndicatorActive) {
 
-            for (int l = 0; l < arrowIndicators.Length; l++) {
-                arrowIndicators[l].SetActive(false);
+            // loops through all indicators
+            foreach (GameObject indicator in arrowIndicators) {
+
+                // sets to invisible (inactive)
+                indicator.SetActive(false);
             }
         }
     }
