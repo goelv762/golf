@@ -60,17 +60,6 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5a90ce2f-1173-4f51-b149-b2755546b50f"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""shotPos"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0a166db7-8c58-4216-a764-c51e9d626598"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",

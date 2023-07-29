@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 1127265115}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Player
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,11 +491,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRB: {fileID: 1127265111}
-  minPower: 0.1
   maxPower: 5
   speedMulti: 5
   inputBuffer: 0.1
   arrowIndicator: {fileID: 5500373345127759052, guid: e39b53b596fd8a14ab40587d35c6fa31, type: 3}
+  arrowIndicatorSpacing: 0.3
+  indicatorMinDistance: 0.1
   ballRenderer: {fileID: 1127265112}
   hoverColour: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
   defaultColour: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
