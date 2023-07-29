@@ -375,7 +375,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -495,11 +495,11 @@ MonoBehaviour:
   speedMulti: 3
   inputBuffer: 0.1
   arrowIndicator: {fileID: 5500373345127759052, guid: e39b53b596fd8a14ab40587d35c6fa31, type: 3}
-  arrowIndicatorSpacing: 0.3
-  minIndicatorDistance: 0
+  arrowIndicatorSpacing: 0.5
+  minIndicatorDistance: 0.3
   ballRenderer: {fileID: 1127265112}
-  hoverColour: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
-  defaultColour: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  hoverColour: {r: 1, g: 1, b: 1, a: 1}
+  defaultColour: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &1274501005
 GameObject:
   m_ObjectHideFlags: 0
