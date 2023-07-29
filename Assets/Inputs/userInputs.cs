@@ -37,7 +37,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""shotActivate"",
+                    ""name"": ""shotActivation"",
                     ""type"": ""Value"",
                     ""id"": ""4abb9c26-58c6-4a8e-a556-d9f042cf1526"",
                     ""expectedControlType"": ""Analog"",
@@ -65,7 +65,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""shotActivate"",
+                    ""action"": ""shotActivation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -138,7 +138,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
         // User
         m_User = asset.FindActionMap("User", throwIfNotFound: true);
         m_User_shotPos = m_User.FindAction("shotPos", throwIfNotFound: true);
-        m_User_shotActivate = m_User.FindAction("shotActivate", throwIfNotFound: true);
+        m_User_shotActivation = m_User.FindAction("shotActivation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -201,13 +201,13 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_User;
     private List<IUserActions> m_UserActionsCallbackInterfaces = new List<IUserActions>();
     private readonly InputAction m_User_shotPos;
-    private readonly InputAction m_User_shotActivate;
+    private readonly InputAction m_User_shotActivation;
     public struct UserActions
     {
         private @UserInputs m_Wrapper;
         public UserActions(@UserInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @shotPos => m_Wrapper.m_User_shotPos;
-        public InputAction @shotActivate => m_Wrapper.m_User_shotActivate;
+        public InputAction @shotActivation => m_Wrapper.m_User_shotActivation;
         public InputActionMap Get() { return m_Wrapper.m_User; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -220,9 +220,9 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
             @shotPos.started += instance.OnShotPos;
             @shotPos.performed += instance.OnShotPos;
             @shotPos.canceled += instance.OnShotPos;
-            @shotActivate.started += instance.OnShotActivate;
-            @shotActivate.performed += instance.OnShotActivate;
-            @shotActivate.canceled += instance.OnShotActivate;
+            @shotActivation.started += instance.OnShotActivation;
+            @shotActivation.performed += instance.OnShotActivation;
+            @shotActivation.canceled += instance.OnShotActivation;
         }
 
         private void UnregisterCallbacks(IUserActions instance)
@@ -230,9 +230,9 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
             @shotPos.started -= instance.OnShotPos;
             @shotPos.performed -= instance.OnShotPos;
             @shotPos.canceled -= instance.OnShotPos;
-            @shotActivate.started -= instance.OnShotActivate;
-            @shotActivate.performed -= instance.OnShotActivate;
-            @shotActivate.canceled -= instance.OnShotActivate;
+            @shotActivation.started -= instance.OnShotActivation;
+            @shotActivation.performed -= instance.OnShotActivation;
+            @shotActivation.canceled -= instance.OnShotActivation;
         }
 
         public void RemoveCallbacks(IUserActions instance)
@@ -298,6 +298,6 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
     public interface IUserActions
     {
         void OnShotPos(InputAction.CallbackContext context);
-        void OnShotActivate(InputAction.CallbackContext context);
+        void OnShotActivation(InputAction.CallbackContext context);
     }
 }

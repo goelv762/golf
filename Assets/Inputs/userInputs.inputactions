@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "shotActivate",
+                    "name": "shotActivation",
                     "type": "Value",
                     "id": "4abb9c26-58c6-4a8e-a556-d9f042cf1526",
                     "expectedControlType": "Analog",
@@ -43,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "shotActivate",
+                    "action": "shotActivation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
