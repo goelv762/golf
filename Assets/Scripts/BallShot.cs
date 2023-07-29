@@ -33,9 +33,6 @@ public class BallShot : MonoBehaviour
     // stores weather a indicator is active
     private bool isIndicatorActive;
 
-    // stores shot length for speed
-    private float shotVectorLength;
-
     // stores all the shot indicators
     private GameObject[] arrowIndicators;
 
@@ -66,7 +63,7 @@ public class BallShot : MonoBehaviour
         ManageIndicator();
 
         // gets the normalised relitave vector of the shot
-        shotVector = GetShotVector();
+        shotVector = BallMaster.GetShotVector(transform.position);
     }
 
     // when mouse is over ball
@@ -87,13 +84,13 @@ public class BallShot : MonoBehaviour
             isShotActive = false;
 
             // if shot power exeeds maxPower
-            if (shotVectorLength > maxPower) {
+            if (BallMaster.shotVectorLength > maxPower) {
                 ballRB.AddForce(-shotVector * maxPower * speedMulti, ForceMode2D.Impulse);
             } 
             
             // if it doesn't
             else {
-                ballRB.AddForce(-shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
+                ballRB.AddForce(-shotVector * BallMaster.shotVectorLength * speedMulti, ForceMode2D.Impulse);
             }
 
         // if the mouse HAS been released but is over ball --> cancel shot
@@ -104,10 +101,10 @@ public class BallShot : MonoBehaviour
     
     private void ManageIndicator() {
         // if there is a shot active and not too small of a shot
-        if (isShotActive && (shotVectorLength > minIndicatorDistance)) {
+        if (isShotActive && (BallMaster.shotVectorLength > minIndicatorDistance)) {
 
             // how many indicators need to be shown
-            int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(shotVectorLength));
+            int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(BallMaster.shotVectorLength));
 
             // loops through all indicators
             for (int k = 0; k < arrowIndicators.Length; k++) {
@@ -165,19 +162,5 @@ public class BallShot : MonoBehaviour
         }
     }
 
-    private Vector2 GetShotVector() {
-        Vector2 currShotVector;
-        // get vector from ball pos to mouse pos
-        // relative vector freom ball to mouse (shotPos) 
-        currShotVector.x = BallMaster.shotPos.x - transform.position.x;
-        currShotVector.y = BallMaster.shotPos.y - transform.position.y;
-
-        // pythagoras theorem (finding hypotenuse of triangle), used to normalise vector
-        // c = √(a^2 + b^2)
-        // a = x, b = y
-        shotVectorLength = Mathf.Sqrt(Mathf.Pow(currShotVector.x, 2) + Mathf.Pow(currShotVector.y, 2));
-
-        // return the normalised the vector by dividing by length
-        return currShotVector / shotVectorLength;
-    }
+    
 }
