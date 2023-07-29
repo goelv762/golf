@@ -15,6 +15,7 @@ public class BallShot : MonoBehaviour
     [Header("Indicator")]
     [SerializeField] private GameObject arrowIndicator;
     [SerializeField] private float arrowIndicatorSpacing;
+    [SerializeField] private float minIndicatorDistance;
 
     [Header("Ball Colour")]
     [SerializeField] private Renderer ballRenderer;
@@ -88,7 +89,7 @@ public class BallShot : MonoBehaviour
     
     private void ManageIndicator() {
 
-        if (isShotActive) {
+        if (isShotActive && (shotVectorLength > minIndicatorDistance)) {
             int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(shotVectorLength));
 
             for (int k = 0; k < arrowIndicators.Length; k++) {
