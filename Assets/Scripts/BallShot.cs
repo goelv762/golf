@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class BallShot : MonoBehaviour
-{
+public class BallShot : MonoBehaviour {
 
     [Header("Ball Components")]
     [SerializeField] private Rigidbody2D ballRB;
@@ -27,6 +26,12 @@ public class BallShot : MonoBehaviour
     // stores weather a indicator is active
     private bool isIndicatorActive;
 
+    // stores shot length for speed
+    private float shotVectorLength;
+
+    private bool isShotActive;
+    private bool isOverBall;
+
     // stores all the shot indicators
     private GameObject[] arrowIndicators;
 
@@ -46,6 +51,9 @@ public class BallShot : MonoBehaviour
         }
     }
 
+    private void OnMouseEnter() { isOverBall = true; }
+    private void OnMouseExit() { isOverBall = false; }
+
     private void FixedUpdate() {
         // for hitting the ball
         BallHit();
@@ -57,44 +65,44 @@ public class BallShot : MonoBehaviour
         ManageIndicator();
 
         // gets the normalised relitave vector of the shot
-        shotVector = BallMaster.GetShotVector(transform.position);
+        shotVector = GetShotVector();
     }
 
 
     private void BallHit() {
         // logic for click and drag shooting
         // initial mouse down on ball
-        if (BallMaster.shotActivation == 1f && BallMaster.isOverBall) { 
-            BallMaster.isShotActive = true; 
+        if (BallMaster.shotActivation == 1f && isOverBall) { 
+            isShotActive = true; 
         }
 
         // if the mouse HAS been released and is not over ball --> shoot
-        else if (BallMaster.shotActivation == 0f && !BallMaster.isOverBall && BallMaster.isShotActive) { 
-            BallMaster.isShotActive = false;
+        else if (BallMaster.shotActivation == 0f && !isOverBall && isShotActive) { 
+            isShotActive = false;
 
             // if shot power exeeds maxPower
-            if (BallMaster.shotVectorLength > maxPower) {
+            if (shotVectorLength > maxPower) {
                 ballRB.AddForce(-shotVector * maxPower * speedMulti, ForceMode2D.Impulse);
             }
             
             // if it doesn't
             else {
-                ballRB.AddForce(-shotVector * BallMaster.shotVectorLength * speedMulti, ForceMode2D.Impulse);
+                ballRB.AddForce(-shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
             }
 
         // if the mouse HAS been released but is over ball --> cancel shot
-        } else if (BallMaster.shotActivation == 0f && BallMaster.isOverBall && BallMaster.isShotActive) {
-            BallMaster.isShotActive = false;
+        } else if (BallMaster.shotActivation == 0f && isOverBall && isShotActive) {
+            isShotActive = false;
         }
     }
 
 
     private void ManageIndicator() {
         // if there is a shot active and not too small of a shot
-        if (BallMaster.isShotActive && (BallMaster.shotVectorLength > minIndicatorDistance)) {
+        if (isShotActive && (shotVectorLength > minIndicatorDistance)) {
 
             // how many indicators need to be shown
-            int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(BallMaster.shotVectorLength));
+            int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(shotVectorLength));
 
             // loops through all indicators
             for (int k = 0; k < arrowIndicators.Length; k++) {
@@ -130,7 +138,7 @@ public class BallShot : MonoBehaviour
         } 
 
         // checks if there is not an active shot and the indicator is still showing
-        else if (!BallMaster.isShotActive && isIndicatorActive) {
+        else if (!isShotActive && isIndicatorActive) {
 
             // loops through all indicators
             foreach (GameObject indicator in arrowIndicators) {
@@ -143,12 +151,28 @@ public class BallShot : MonoBehaviour
 
     private void BallColour() {
         // if there is an active shot or the mouse is over the ball --> change colour
-        if (BallMaster.isShotActive || BallMaster.isOverBall) {
+        if (isShotActive || isOverBall) {
             ballRenderer.material.color = hoverColour;
         } 
         // otherwise, set to default
         else {
             ballRenderer.material.color = defaultColour;
         }
+    }
+
+    private Vector2 GetShotVector() {
+        Vector2 currShotVector;
+        // get vector from ball pos to mouse pos
+        // relative vector freom ball to mouse (shotPos) 
+        currShotVector.x = BallMaster.shotPos.x - transform.position.x;
+        currShotVector.y = BallMaster.shotPos.y - transform.position.y;
+
+        // pythagoras theorem (finding hypotenuse of triangle), used to normalise vector
+        // c = √(a^2 + b^2)
+        // a = x, b = y
+        shotVectorLength = Mathf.Sqrt(Mathf.Pow(currShotVector.x, 2) + Mathf.Pow(currShotVector.y, 2));
+
+        // return the normalised the vector by dividing by length
+        return currShotVector / shotVectorLength;
     }
 }
