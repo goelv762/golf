@@ -129,10 +129,7 @@ public class BallShot : MonoBehaviour {
                 // if it does not need to be shown (>= target) --> don't update position, hide it
                 else if (k >= targetIndicators) { 
                     // sets to invisible (inactive)
-                    arrowIndicators[k].SetActive(false); 
-
-                    // sets bool to false to make sure list is not being looped through for no reason
-                    isIndicatorActive = false;
+                    arrowIndicators[k].SetActive(false);
                 } 
             }
         } 
@@ -141,11 +138,10 @@ public class BallShot : MonoBehaviour {
         else if (!isShotActive && isIndicatorActive) {
 
             // loops through all indicators
-            foreach (GameObject indicator in arrowIndicators) {
-
-                // sets to invisible (inactive)
-                indicator.SetActive(false);
+            for (int l = 0; l < arrowIndicators.Length; l++) {
+                arrowIndicators[l].SetActive(false);
             }
+            isIndicatorActive = false;
         }
     }
 
@@ -153,7 +149,7 @@ public class BallShot : MonoBehaviour {
         // if there is an active shot or the mouse is over the ball --> change colour
         if (isShotActive || isOverBall) {
             ballRenderer.material.color = hoverColour;
-        } 
+        }
         // otherwise, set to default
         else {
             ballRenderer.material.color = defaultColour;
