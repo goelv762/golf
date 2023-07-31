@@ -140,7 +140,7 @@ public class BallShot : MonoBehaviour {
         } 
 
         // checks if there is not an active shot and the indicator is still showing
-        else if (!isShotActive && isIndicatorActive) {
+        else if ((!isShotActive || (shotVectorLength <= minIndicatorDistance)) && isIndicatorActive) {
 
             // loops through all indicators
             for (int l = 0; l < arrowIndicators.Length; l++) {
