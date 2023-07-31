@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: cee25fd753d03354c9007c2afc38125f, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -395,7 +395,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.11000001, y: 0.11000001, z: 0.11000001}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -492,10 +492,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballRB: {fileID: 1127265111}
   maxPower: 5
-  speedMulti: 3
+  speedMulti: 5
   inputBuffer: 0.1
   arrowIndicator: {fileID: 5500373345127759052, guid: e39b53b596fd8a14ab40587d35c6fa31, type: 3}
-  arrowIndicatorSpacing: 0.5
+  arrowIndicatorSpacing: 0.3
   minIndicatorDistance: 0.3
   ballRenderer: {fileID: 1127265112}
   hoverColour: {r: 1, g: 1, b: 1, a: 1}

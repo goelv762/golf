@@ -22,12 +22,15 @@ public class BallShot : MonoBehaviour {
 
     // stores the currentShotVector
     private Vector2 shotVector;
+    // stored to make sure the indicator is not being updated for no reason
+    private Vector2 prevShotVector;
 
     // stores weather a indicator is active
     private bool isIndicatorActive;
 
     // stores shot length for speed
     private float shotVectorLength;
+    
 
     private bool isShotActive;
     private bool isOverBall;
@@ -99,7 +102,7 @@ public class BallShot : MonoBehaviour {
 
     private void ManageIndicator() {
         // if there is a shot active and not too small of a shot
-        if (isShotActive && (shotVectorLength > minIndicatorDistance)) {
+        if (isShotActive && (shotVectorLength > minIndicatorDistance) && prevShotVector != shotVector) {
 
             // how many indicators need to be shown
             int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(shotVectorLength));
@@ -132,6 +135,8 @@ public class BallShot : MonoBehaviour {
                     arrowIndicators[k].SetActive(false);
                 } 
             }
+
+            prevShotVector = shotVector;
         } 
 
         // checks if there is not an active shot and the indicator is still showing
