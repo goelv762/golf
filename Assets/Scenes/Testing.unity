@@ -259,11 +259,11 @@ GameObject:
   - component: {fileID: 1127265113}
   - component: {fileID: 1127265112}
   - component: {fileID: 1127265111}
-  - component: {fileID: 1127265110}
-  - component: {fileID: 1127265116}
   - component: {fileID: 1127265114}
   - component: {fileID: 1127265117}
   - component: {fileID: 1127265115}
+  - component: {fileID: 1127265118}
+  - component: {fileID: 1127265119}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -271,41 +271,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &1127265110
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127265109}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!50 &1127265111
 Rigidbody2D:
   serializedVersion: 4
@@ -329,10 +294,10 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1127265112
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -443,7 +408,64 @@ MonoBehaviour:
   m_DefaultActionMap: User
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!58 &1127265116
+--- !u!114 &1127265117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127265109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da7d56b349ee444baa04da71ecf2030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRB: {fileID: 1127265111}
+  maxPower: 5
+  speedMulti: 5
+  inputBuffer: 0.1
+  arrowIndicator: {fileID: 5500373345127759052, guid: e39b53b596fd8a14ab40587d35c6fa31, type: 3}
+  arrowIndicatorSpacing: 0.3
+  minIndicatorDistance: 0.3
+  ballRenderer: {fileID: 1127265112}
+  hoverColour: {r: 1, g: 1, b: 1, a: 1}
+  defaultColour: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+--- !u!58 &1127265118
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127265109}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.49999997
+--- !u!58 &1127265119
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -477,29 +499,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
---- !u!114 &1127265117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127265109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da7d56b349ee444baa04da71ecf2030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballRB: {fileID: 1127265111}
-  maxPower: 5
-  speedMulti: 5
-  inputBuffer: 0.1
-  arrowIndicator: {fileID: 5500373345127759052, guid: e39b53b596fd8a14ab40587d35c6fa31, type: 3}
-  arrowIndicatorSpacing: 0.3
-  minIndicatorDistance: 0.3
-  ballRenderer: {fileID: 1127265112}
-  hoverColour: {r: 1, g: 1, b: 1, a: 1}
-  defaultColour: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  m_Radius: 1.5
 --- !u!1 &1274501005
 GameObject:
   m_ObjectHideFlags: 0
