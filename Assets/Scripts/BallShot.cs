@@ -11,8 +11,8 @@ public class BallShot : MonoBehaviour {
     [SerializeField] private float inputBuffer;
 
     [Header("Indicator")]
-    [SerializeField] private GameObject arrowIndicator;
-    [SerializeField] private float arrowIndicatorSpacing;
+    [SerializeField] private GameObject shotIndicator;
+    [SerializeField] private float shotIndicatorSpacing;
     [SerializeField] private float minIndicatorDistance;
 
     [Header("Ball Colour")]
@@ -36,21 +36,21 @@ public class BallShot : MonoBehaviour {
     private bool isOverBall;
 
     // stores all the shot indicators
-    private GameObject[] arrowIndicators;
+    private GameObject[] shotIndicators;
 
     // stores the amount of currently active indicators
     private int currIndicatorActive;
 
     private void Awake() {
-        // stores arrow indicators for later retrival
+        // stores shot indicators for later retrival
         // using _ as it is a unused var
-        arrowIndicators = new GameObject[maxPower];
+        shotIndicators = new GameObject[maxPower];
 
-        for (int i = 0; i < arrowIndicators.Length; i++) {
-            arrowIndicators[i] = Instantiate(arrowIndicator, transform.position, Quaternion.identity);
+        for (int i = 0; i < shotIndicators.Length; i++) {
+            shotIndicators[i] = Instantiate(shotIndicator, transform.position, Quaternion.identity);
 
             // starts them hidden until needed
-            arrowIndicators[i].SetActive(false);
+            shotIndicators[i].SetActive(false);
         }
     }
 
@@ -108,23 +108,23 @@ public class BallShot : MonoBehaviour {
             int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(shotVectorLength));
 
             // loops through all indicators
-            for (int k = 0; k < arrowIndicators.Length; k++) {
+            for (int k = 0; k < shotIndicators.Length; k++) {
                 // hides or shows the indicators based of shotVectorLength
                 // if it needs to be shown (< target) --> update position, set to visible
                 if (k < targetIndicators) {
                     Vector3 relativeIndicatorPos = Vector3.zero;
-                    Vector2 currShotVector = shotVector * (k + 1) * arrowIndicatorSpacing;
+                    Vector2 currShotVector = shotVector * (k + 1) * shotIndicatorSpacing;
                     // positions indicators if they are shown
                     relativeIndicatorPos = new Vector3(currShotVector.x, currShotVector.y, 0f);
 
                     // use negitave to get other side of ball 
-                    arrowIndicators[k].transform.position = -relativeIndicatorPos + transform.position;
+                    shotIndicators[k].transform.position = -relativeIndicatorPos + transform.position;
 
                     // use negitave to face opposite direction of ball
-                    arrowIndicators[k].transform.up = -shotVector;
+                    shotIndicators[k].transform.up = -shotVector;
 
                     // sets to visible (active)
-                    arrowIndicators[k].SetActive(true);
+                    shotIndicators[k].SetActive(true);
 
                     // sets bool to true to make sure list is not being looped through for no reason
                     isIndicatorActive = true;
@@ -132,7 +132,7 @@ public class BallShot : MonoBehaviour {
                 // if it does not need to be shown (>= target) --> don't update position, hide it
                 else if (k >= targetIndicators) { 
                     // sets to invisible (inactive)
-                    arrowIndicators[k].SetActive(false);
+                    shotIndicators[k].SetActive(false);
                 } 
             }
 
@@ -143,8 +143,8 @@ public class BallShot : MonoBehaviour {
         else if ((!isShotActive || (shotVectorLength <= minIndicatorDistance)) && isIndicatorActive) {
 
             // loops through all indicators
-            for (int l = 0; l < arrowIndicators.Length; l++) {
-                arrowIndicators[l].SetActive(false);
+            for (int l = 0; l < shotIndicators.Length; l++) {
+                shotIndicators[l].SetActive(false);
             }
             isIndicatorActive = false;
         }
