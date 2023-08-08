@@ -21,11 +21,6 @@ public class BallShot : MonoBehaviour {
     [SerializeField] Color hoverColour;
     [SerializeField] Color defaultColour;
 
-    [Header("Trailling UI")]
-    [SerializeField] private Slider ballSize;
-    [SerializeField] private Slider indicatorSize;
-    [SerializeField] private Slider indicatorSpacing;
-
     // stores the currentShotVector
     private Vector2 shotVector;
     // stored to make sure the indicator is not being updated for no reason
@@ -54,10 +49,6 @@ public class BallShot : MonoBehaviour {
             // starts them hidden until needed
             shotIndicators[i].SetActive(false);
         }
-
-        ballSize.value = 0.5f; 
-        indicatorSize.value = 0.5f;
-        indicatorSpacing.value = 0.5f;
     }
 
     private void OnMouseEnter() { isOverBall = true; }
@@ -75,8 +66,6 @@ public class BallShot : MonoBehaviour {
 
         // gets the normalised relitave vector of the shot
         shotVector = GetShotVector();
-
-        transform.localScale = new Vector3(0.1f, 0.1f, 1f) * (ballSize.value * 2);
     }
 
 
@@ -121,7 +110,7 @@ public class BallShot : MonoBehaviour {
                 // if it needs to be shown (< target) --> update position, set to visible
                 if (k < targetIndicators) {
                     Vector3 relativeIndicatorPos = Vector3.zero;
-                    Vector2 currShotVector = shotVector * (k + 1) * shotIndicatorSpacing * indicatorSpacing.value * 2;
+                    Vector2 currShotVector = shotVector * (k + 1) * shotIndicatorSpacing;
                     // positions indicators if they are shown
                     relativeIndicatorPos = new Vector3(currShotVector.x, currShotVector.y, 0f);
 
@@ -135,7 +124,7 @@ public class BallShot : MonoBehaviour {
                     shotIndicators[k].SetActive(true);
 
                     // trailling size
-                    shotIndicators[k].transform.localScale = new Vector3(0.15f, 0.09f, 1f) * indicatorSize.value * 2;
+                    shotIndicators[k].transform.localScale = new Vector3(0.15f, 0.09f, 1f);
 
                     // sets bool to true to make sure list is not being looped through for no reason
                     isIndicatorActive = true;
