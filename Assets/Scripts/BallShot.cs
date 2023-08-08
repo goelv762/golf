@@ -175,7 +175,6 @@ public class BallShot : MonoBehaviour {
         // c = √(a^2 + b^2)
         // a = x, b = y
         shotVectorLength = Mathf.Sqrt(Mathf.Pow(currShotVector.x, 2) + Mathf.Pow(currShotVector.y, 2));
-        Debug.Log(Mathf.Infinity / Mathf.Infinity);
 
         // return the normalised the vector by dividing by length
         return currShotVector / shotVectorLength;
