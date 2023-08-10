@@ -462,8 +462,8 @@ GameObject:
   - component: {fileID: 1127265114}
   - component: {fileID: 1127265117}
   - component: {fileID: 1127265115}
-  - component: {fileID: 1127265118}
   - component: {fileID: 1127265119}
+  - component: {fileID: 1127265118}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -560,7 +560,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -625,7 +625,7 @@ MonoBehaviour:
   speedMulti: 4
   inputBuffer: 0.1
   shotIndicator: {fileID: 5500373345127759052, guid: e39b53b596fd8a14ab40587d35c6fa31, type: 3}
-  shotIndicatorSpacing: 0.3
+  shotIndicatorSpacing: 0.33
   minIndicatorDistance: 0.3
   ballRenderer: {fileID: 1127265112}
   hoverColour: {r: 1, g: 1, b: 1, a: 1}
@@ -659,12 +659,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.49999997
+  m_Radius: 3
 --- !u!58 &1127265119
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -694,12 +694,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 0.5
 --- !u!1 &1274501005
 GameObject:
   m_ObjectHideFlags: 0
