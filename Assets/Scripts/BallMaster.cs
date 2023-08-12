@@ -10,6 +10,9 @@ public class BallMaster : MonoBehaviour {
 
     // stores the value for the confirmation of shot
     static public float shotActivation;
+
+    //  stores the value for scroll whell delta (only y axis)
+    static public float scrollDelta;
     
     // used to get inputs (e.g. mouse: pos, clicking)
     private UserInputs userInputs;
@@ -22,12 +25,15 @@ public class BallMaster : MonoBehaviour {
     private void OnDisable() { userInputs.Disable(); }
 
     private void Update() {
-        GetInputs();
+        GetInputs();    
     }
 
     private void GetInputs() {
-        rawshotPos = userInputs.User.shotPos.ReadValue<Vector2>();
-        shotActivation = userInputs.User.shotActivation.ReadValue<float>();
+        rawshotPos = userInputs.Game.shotPos.ReadValue<Vector2>();
+        shotActivation = userInputs.Game.shotActivation.ReadValue<float>();
+
+        // dividing by 120 returns a delta value of -1, 0 or 1
+        scrollDelta = userInputs.Game.Zoom.ReadValue<float>() / 120;
 
         shotPos = mainCamera.ScreenToWorldPoint(rawshotPos);
     }

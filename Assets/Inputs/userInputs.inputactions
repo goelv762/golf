@@ -2,7 +2,7 @@
     "name": "userInputs",
     "maps": [
         {
-            "name": "User",
+            "name": "Game",
             "id": "11b6c9de-b86a-4aba-9d5d-695f9ce72b97",
             "actions": [
                 {
@@ -19,6 +19,15 @@
                     "type": "Value",
                     "id": "4abb9c26-58c6-4a8e-a556-d9f042cf1526",
                     "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "c25b0e47-1155-4925-94f1-55138440b899",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -44,6 +53,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "shotActivation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "436e382f-1750-472c-85b3-76137e712595",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

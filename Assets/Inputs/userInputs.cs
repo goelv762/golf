@@ -24,7 +24,7 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
     ""name"": ""userInputs"",
     ""maps"": [
         {
-            ""name"": ""User"",
+            ""name"": ""Game"",
             ""id"": ""11b6c9de-b86a-4aba-9d5d-695f9ce72b97"",
             ""actions"": [
                 {
@@ -41,6 +41,15 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""4abb9c26-58c6-4a8e-a556-d9f042cf1526"",
                     ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""c25b0e47-1155-4925-94f1-55138440b899"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -66,6 +75,17 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""shotActivation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""436e382f-1750-472c-85b3-76137e712595"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -135,10 +155,11 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // User
-        m_User = asset.FindActionMap("User", throwIfNotFound: true);
-        m_User_shotPos = m_User.FindAction("shotPos", throwIfNotFound: true);
-        m_User_shotActivation = m_User.FindAction("shotActivation", throwIfNotFound: true);
+        // Game
+        m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
+        m_Game_shotPos = m_Game.FindAction("shotPos", throwIfNotFound: true);
+        m_Game_shotActivation = m_Game.FindAction("shotActivation", throwIfNotFound: true);
+        m_Game_Zoom = m_Game.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -197,35 +218,40 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // User
-    private readonly InputActionMap m_User;
-    private List<IUserActions> m_UserActionsCallbackInterfaces = new List<IUserActions>();
-    private readonly InputAction m_User_shotPos;
-    private readonly InputAction m_User_shotActivation;
-    public struct UserActions
+    // Game
+    private readonly InputActionMap m_Game;
+    private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
+    private readonly InputAction m_Game_shotPos;
+    private readonly InputAction m_Game_shotActivation;
+    private readonly InputAction m_Game_Zoom;
+    public struct GameActions
     {
         private @UserInputs m_Wrapper;
-        public UserActions(@UserInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @shotPos => m_Wrapper.m_User_shotPos;
-        public InputAction @shotActivation => m_Wrapper.m_User_shotActivation;
-        public InputActionMap Get() { return m_Wrapper.m_User; }
+        public GameActions(@UserInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @shotPos => m_Wrapper.m_Game_shotPos;
+        public InputAction @shotActivation => m_Wrapper.m_Game_shotActivation;
+        public InputAction @Zoom => m_Wrapper.m_Game_Zoom;
+        public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UserActions set) { return set.Get(); }
-        public void AddCallbacks(IUserActions instance)
+        public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
+        public void AddCallbacks(IGameActions instance)
         {
-            if (instance == null || m_Wrapper.m_UserActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UserActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_GameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameActionsCallbackInterfaces.Add(instance);
             @shotPos.started += instance.OnShotPos;
             @shotPos.performed += instance.OnShotPos;
             @shotPos.canceled += instance.OnShotPos;
             @shotActivation.started += instance.OnShotActivation;
             @shotActivation.performed += instance.OnShotActivation;
             @shotActivation.canceled += instance.OnShotActivation;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
-        private void UnregisterCallbacks(IUserActions instance)
+        private void UnregisterCallbacks(IGameActions instance)
         {
             @shotPos.started -= instance.OnShotPos;
             @shotPos.performed -= instance.OnShotPos;
@@ -233,23 +259,26 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
             @shotActivation.started -= instance.OnShotActivation;
             @shotActivation.performed -= instance.OnShotActivation;
             @shotActivation.canceled -= instance.OnShotActivation;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
-        public void RemoveCallbacks(IUserActions instance)
+        public void RemoveCallbacks(IGameActions instance)
         {
-            if (m_Wrapper.m_UserActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GameActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IUserActions instance)
+        public void SetCallbacks(IGameActions instance)
         {
-            foreach (var item in m_Wrapper.m_UserActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GameActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_UserActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GameActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public UserActions @User => new UserActions(this);
+    public GameActions @Game => new GameActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -295,9 +324,10 @@ public partial class @UserInputs: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_XRSchemeIndex];
         }
     }
-    public interface IUserActions
+    public interface IGameActions
     {
         void OnShotPos(InputAction.CallbackContext context);
         void OnShotActivation(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }
