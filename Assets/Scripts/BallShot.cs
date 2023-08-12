@@ -8,12 +8,11 @@ public class BallShot : MonoBehaviour {
     [SerializeField] private float speedMulti;
 
     [Header("Input attributes")]
-    [SerializeField] private float inputBuffer;
+    [SerializeField] private float minShotDist;
 
     [Header("Indicator")]
     [SerializeField] private GameObject shotIndicator;
     [SerializeField] private float shotIndicatorSpacing;
-    [SerializeField] private float minIndicatorDistance;
 
     [Header("Ball Colour")]
     [SerializeField] private Renderer ballRenderer;
@@ -76,7 +75,7 @@ public class BallShot : MonoBehaviour {
         }
 
         // if the mouse HAS been released and is not over ball --> shoot
-        else if (BallMaster.shotActivation == 0f && !isOverBall && isShotActive) { 
+        else if (BallMaster.shotActivation == 0f && !isOverBall && isShotActive && shotVectorLength > minShotDist) { 
             isShotActive = false;
 
             // if shot power exeeds maxPower
@@ -98,7 +97,7 @@ public class BallShot : MonoBehaviour {
 
     private void ManageIndicator() {
         // if there is a shot active and not too small of a shot
-        if (isShotActive && (shotVectorLength > minIndicatorDistance) && prevShotVector != shotVector) {
+        if (isShotActive && (shotVectorLength > minShotDist) && prevShotVector != shotVector) {
 
             // how many indicators need to be shown
             int targetIndicators = Mathf.RoundToInt(Mathf.Ceil(shotVectorLength));
@@ -108,10 +107,10 @@ public class BallShot : MonoBehaviour {
                 // hides or shows the indicators based of shotVectorLength
                 // if it needs to be shown (< target) --> update position, set to visible
                 if (k < targetIndicators) {
-                    Vector3 relativeIndicatorPos = Vector3.zero;
                     Vector2 currShotVector = shotVector * (k + 1) * shotIndicatorSpacing;
+
                     // positions indicators if they are shown
-                    relativeIndicatorPos = new Vector3(currShotVector.x, currShotVector.y, 0f);
+                    Vector3 relativeIndicatorPos = new Vector3(currShotVector.x, currShotVector.y, 0f);
 
                     // use negitave to get other side of ball 
                     shotIndicators[k].transform.position = -relativeIndicatorPos + transform.position;
@@ -142,7 +141,7 @@ public class BallShot : MonoBehaviour {
         } 
 
         // checks if there is not an active shot and the indicator is still showing
-        else if ((!isShotActive || (shotVectorLength <= minIndicatorDistance)) && isIndicatorActive) {
+        else if ((!isShotActive || (shotVectorLength <= minShotDist)) && isIndicatorActive) {
 
             // loops through all indicators
             for (int l = 0; l < shotIndicators.Length; l++) {
