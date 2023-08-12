@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallShot : MonoBehaviour {
@@ -163,7 +164,7 @@ public class BallShot : MonoBehaviour {
     }
 
     private Vector2 GetShotVector() {
-        Vector2 currShotVector;
+        Vector2 currShotVector = Vector2.zero;
         // get vector from ball pos to mouse pos
         // relative vector freom ball to mouse (shotPos) 
         currShotVector.x = BallMaster.shotPos.x - transform.position.x;
