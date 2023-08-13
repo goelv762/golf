@@ -55,7 +55,9 @@ public class BallShot : MonoBehaviour {
     private void FixedUpdate() {
         // for hitting the ball
         BallHit();
+    }
 
+    private void Update() {
         // for changing the colour of ball
         BallColour();
 
@@ -74,8 +76,8 @@ public class BallShot : MonoBehaviour {
             isShotActive = true; 
         }
 
-        // if the mouse HAS been released and is not over ball --> shoot
-        else if (BallMaster.shotActivation == 0f && !isOverBall && isShotActive && shotVectorLength > minShotDist) { 
+        // if the mouse HAS been released, shot is active and indiactor is active --> shoot
+        else if (BallMaster.shotActivation == 0f && isShotActive && isIndicatorActive) { 
             isShotActive = false;
 
             // if shot power exeeds maxPower
