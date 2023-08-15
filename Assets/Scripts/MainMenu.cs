@@ -9,7 +9,10 @@ public class MainMenu : MonoBehaviour
     }
 
     public void QuitGame() {
-        // Quits out of game
+        // for editor
+        UnityEditor.EditorApplication.isPlaying = false;
+
+        // for built game
         Application.Quit();
     }
 }
