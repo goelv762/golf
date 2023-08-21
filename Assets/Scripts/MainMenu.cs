@@ -26,10 +26,14 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void Update() {
-        button1.localPosition = new Vector3(x_pos.value, y_pos.value, 1f);
+        button1.localPosition = new Vector3(-x_pos.value, y_pos.value, 1f);
         button1.localScale = Vector3.one * scale.value;
 
-        button2.localPosition = new Vector3(-x_pos.value, y_pos.value, 1f);
+        button2.localPosition = new Vector3(x_pos.value, y_pos.value, 1f);
         button2.localScale = Vector3.one * scale.value;
+
+        Debug.Log("x - pos: " + button1.localPosition.x + 
+                  " | y - pos: " + button1.localPosition.y +
+                  " | scale: " + button1.localScale.x);
     }
 }
