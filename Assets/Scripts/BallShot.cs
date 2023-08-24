@@ -9,6 +9,8 @@ public class BallShot : MonoBehaviour {
 
     [Header("Input attributes")]
     [SerializeField] private float minShotDist;
+    // how fast the ball can be travelling before the ball can eb shot again
+    [SerializeField] private float shotMaxSpeed;
 
     [Header("Indicator")]
     [SerializeField] private GameObject shotIndicator;
@@ -66,13 +68,15 @@ public class BallShot : MonoBehaviour {
 
         // gets the normalised relitave vector of the shot
         shotVector = GetShotVector();
+
+        Debug.Log(ballRB.velocity.magnitude);
     }
 
 
     private void BallHit() {
         // logic for click and drag shooting
         // initial mouse down on ball
-        if (BallMaster.shotActivation == 1f && isOverBall) { 
+        if (BallMaster.shotActivation == 1f && isOverBall && ballRB.velocity.magnitude <= shotMaxSpeed) {
             isShotActive = true; 
         }
 
@@ -155,7 +159,7 @@ public class BallShot : MonoBehaviour {
 
     private void BallColour() {
         // if there is an active shot or the mouse is over the ball --> change colour
-        if (isShotActive || isOverBall) {
+        if ((isShotActive || isOverBall) && ballRB.velocity.magnitude <= shotMaxSpeed) {
             ballRenderer.material.color = hoverColour;
         }
         // otherwise, set to default

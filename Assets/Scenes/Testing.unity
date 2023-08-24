@@ -837,6 +837,7 @@ MonoBehaviour:
   maxPower: 5
   speedMulti: 5
   minShotDist: 0.2
+  shotMaxSpeed: 0.2
   shotIndicator: {fileID: 5500373345127759052, guid: e39b53b596fd8a14ab40587d35c6fa31, type: 3}
   shotIndicatorSpacing: 0.33
   ballRenderer: {fileID: 1127265112}
