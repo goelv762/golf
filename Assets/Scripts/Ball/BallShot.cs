@@ -68,6 +68,10 @@ public class BallShot : MonoBehaviour {
 
         // gets the normalised relitave vector of the shot
         shotVector = GetShotVector();
+
+        if (ballRB.velocity.magnitude < 0.5f) {
+            ballRB.velocity = Vector2.zero;
+        }
     }
 
 
