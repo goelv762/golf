@@ -68,8 +68,6 @@ public class BallShot : MonoBehaviour {
 
         // gets the normalised relitave vector of the shot
         shotVector = GetShotVector();
-
-        Debug.Log(ballRB.velocity.magnitude);
     }
 
 
