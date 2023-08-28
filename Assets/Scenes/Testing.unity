@@ -456,7 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AssetsPPU: 16
   m_RefResolutionX: 640
-  m_RefResolutionY: 320
+  m_RefResolutionY: 360
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -1239,6 +1239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballRB: {fileID: 1127265111}
   maxPower: 5
+  minSpeed: 0.2
   speedMulti: 5
   minShotDist: 0.2
   shotMaxSpeed: 0.2

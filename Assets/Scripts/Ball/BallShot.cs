@@ -5,6 +5,7 @@ public class BallShot : MonoBehaviour {
     [Header("Ball Components")]
     [SerializeField] private Rigidbody2D ballRB;
     [SerializeField] private int maxPower;
+    [SerializeField] private float minSpeed;
     [SerializeField] private float speedMulti;
 
     [Header("Input attributes")]
@@ -69,7 +70,7 @@ public class BallShot : MonoBehaviour {
         // gets the normalised relitave vector of the shot
         shotVector = GetShotVector();
 
-        if (ballRB.velocity.magnitude < 0.5f) {
+        if (ballRB.velocity.magnitude <= minSpeed) {
             ballRB.velocity = Vector2.zero;
         }
     }
