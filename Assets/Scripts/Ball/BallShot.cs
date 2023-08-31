@@ -130,9 +130,6 @@ public class BallShot : MonoBehaviour {
                     // sets to visible (active)
                     shotIndicators[k].SetActive(true);
 
-                    // trailling size
-                    shotIndicators[k].transform.localScale = new Vector3(0.15f, 0.09f, 1f);
-
                     // sets bool to true to make sure list is not being looped through for no reason
                     isIndicatorActive = true;
 
