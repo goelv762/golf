@@ -10059,8 +10059,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.05882353}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.05882353}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.15686275}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 0}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
@@ -10084,7 +10084,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1891066734}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10327,8 +10327,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.05882353}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.05882353}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.15686275}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 0}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
