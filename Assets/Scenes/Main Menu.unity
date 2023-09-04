@@ -5279,7 +5279,7 @@ GameObject:
   - component: {fileID: 372169850}
   - component: {fileID: 372169849}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: OptionsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5317,7 +5317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0.78431374}
+  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10717,7 +10717,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690933688}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10727,8 +10727,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -623.6361, y: -303.39728}
-  m_SizeDelta: {x: 352.7278, y: 966.7946}
+  m_AnchoredPosition: {x: -660.0679, y: -301.37555}
+  m_SizeDelta: {x: 432.6498, y: 957.7452}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690933690
 MonoBehaviour:
@@ -11520,7 +11520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1305682905}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SettingsImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11533,7 +11533,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305682904}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11707,7 +11707,7 @@ Camera:
   far clip plane: 1000
   field of view: 123.5
   orthographic: 1
-  orthographic size: 387
+  orthographic size: 400
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
