@@ -12580,13 +12580,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e051d12b5abd304c878270c70fa23c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VFXtext: {fileID: 1829565442}
-  VFXon: {r: 0.5491655, g: 1, b: 0.504717, a: 1}
-  VFXoff: {r: 1, g: 0.4292453, b: 0.4292453, a: 1}
-  VFXobjs:
-  - {fileID: 417448426}
-  - {fileID: 303813347}
-  - {fileID: 2034782199}
+  vfxText: {fileID: 1829565442}
+  vfxOnColour: {r: 0.57416636, g: 1, b: 0.5330188, a: 1}
+  vfxOffColour: {r: 1, g: 0.5235849, b: 0.5235849, a: 1}
+  vfxObjs:
+  - {fileID: 237949381}
 --- !u!1 &2024145807
 GameObject:
   m_ObjectHideFlags: 0
