@@ -4,10 +4,11 @@ public class Quit : MonoBehaviour
 {
         public void QuitGame() {
         // for editor
-# if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-# endif
+        # if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+                
         // for built game
-        Application.Quit();
+        # endif
+                Application.Quit();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class Start : MonoBehaviour
 {
         public void LoadGame() {
-        // next index of scenes in build settings
+        // loads current scene index + 1
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
