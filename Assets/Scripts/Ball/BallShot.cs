@@ -3,23 +3,42 @@ using UnityEngine;
 public class BallShot : MonoBehaviour {
 
     [Header("Ball Components")]
+
+    // used to apply force to ball
     [SerializeField] private Rigidbody2D ballRB;
+
+    // max amount of indicators that can appear
     [SerializeField] private int maxPower;
+
+    // min speed before stopping
     [SerializeField] private float minSpeed;
     [SerializeField] private float speedMulti;
 
     [Header("Input attributes")]
+
+    // minimum distance player can take a shot from
     [SerializeField] private float minShotDist;
+
     // how fast the ball can be travelling before the ball can eb shot again
     [SerializeField] private float shotMaxSpeed;
 
     [Header("Indicator")]
+
+    // arrow indicator
     [SerializeField] private GameObject shotIndicator;
+
+    // space between indicators
     [SerializeField] private float shotIndicatorSpacing;
 
     [Header("Ball Colour")]
+
+    // used to change colour of ball
     [SerializeField] private Renderer ballRenderer;
+
+    // colour on hover
     [SerializeField] Color hoverColour;
+
+    // colour default
     [SerializeField] Color defaultColour;
 
     // stores the currentShotVector
@@ -33,18 +52,23 @@ public class BallShot : MonoBehaviour {
     // stores shot length for speed
     private float shotVectorLength;
 
+    // stores if a shot is active
     private bool isShotActive;
+
+    // if the cursor is over the ball
     private bool isOverBall;
 
     // stores all the shot indicators
     private GameObject[] shotIndicators;
 
     private void Awake() {
-        // stores shot indicators for later retrival
-        // using _ as it is a unused var
+        // creates an array of type GameObject with len maxPower
         shotIndicators = new GameObject[maxPower];
 
+        // loops through array
         for (int i = 0; i < shotIndicators.Length; i++) {
+
+            // spawns indicators from prefab into gamObjects
             shotIndicators[i] = Instantiate(shotIndicator, transform.position, Quaternion.identity);
 
             // starts them hidden until needed
@@ -52,8 +76,12 @@ public class BallShot : MonoBehaviour {
         }
     }
 
-    private void OnMouseEnter() { isOverBall = true; }
-    private void OnMouseExit() { isOverBall = false; }
+    private void OnMouseEnter() { 
+        isOverBall = true; 
+    }
+    private void OnMouseExit() { 
+        isOverBall = false; 
+    }
 
     private void FixedUpdate() {
         // for hitting the ball
@@ -70,6 +98,7 @@ public class BallShot : MonoBehaviour {
         // gets the normalised relitave vector of the shot
         shotVector = GetShotVector();
 
+        // checks if velocity  < min speed --> stop ball
         if (ballRB.velocity.magnitude <= minSpeed) {
             ballRB.velocity = Vector2.zero;
         }
@@ -89,11 +118,13 @@ public class BallShot : MonoBehaviour {
 
             // if shot power exeeds maxPower
             if (shotVectorLength > maxPower) {
+                // hit ball with max force allowed
                 ballRB.AddForce(-shotVector * maxPower * speedMulti, ForceMode2D.Impulse);
             }
             
             // if it doesn't
             else {
+                // hit ball with current force
                 ballRB.AddForce(-shotVector * shotVectorLength * speedMulti, ForceMode2D.Impulse);
             }
 
@@ -116,6 +147,7 @@ public class BallShot : MonoBehaviour {
                 // hides or shows the indicators based of shotVectorLength
                 // if it needs to be shown (< target) --> update position, set to visible
                 if (k < targetIndicators) {
+                    // finds spacing required using follow variables
                     Vector2 currShotVector = shotVector * (k + 1) * shotIndicatorSpacing;
 
                     // positions indicators if they are shown
@@ -143,6 +175,7 @@ public class BallShot : MonoBehaviour {
                 } 
             }
 
+            // sets prev to current for future checks (next frame / tick)
             prevShotVector = shotVector;
         } 
 
@@ -151,6 +184,8 @@ public class BallShot : MonoBehaviour {
 
             // loops through all indicators
             for (int l = 0; l < shotIndicators.Length; l++) {
+
+                // deactivates then as they are not being used
                 shotIndicators[l].SetActive(false);
             }
             isIndicatorActive = false;
@@ -160,10 +195,12 @@ public class BallShot : MonoBehaviour {
     private void BallColour() {
         // if there is an active shot or the mouse is over the ball --> change colour
         if ((isShotActive || isOverBall) && ballRB.velocity.magnitude <= shotMaxSpeed) {
+            // change to hover colour
             ballRenderer.material.color = hoverColour;
         }
         // otherwise, set to default
         else {
+            // change to default colour
             ballRenderer.material.color = defaultColour;
         }
     }
