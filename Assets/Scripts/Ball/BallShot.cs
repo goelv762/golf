@@ -159,6 +159,9 @@ public class BallShot : MonoBehaviour {
                     // use negitave to face opposite direction of ball
                     shotIndicators[k].transform.up = -shotVector;
 
+                    // subtracting 45 desgrees for visual
+                    shotIndicators[k].transform.Rotate(0, 0, -45);
+
                     // sets to visible (active)
                     shotIndicators[k].SetActive(true);
 
