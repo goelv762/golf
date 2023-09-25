@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Back : MonoBehaviour
 {
-    public void LastScene() {
-        // loads current scene index - 1
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    public void ToMenu() {
+        // loads menu scene index (always  first therefore index 0)
+        SceneManager.LoadScene(0);
     }
 }
