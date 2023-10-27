@@ -8,7 +8,6 @@ public class Win : MonoBehaviour
     [SerializeField] private GameObject settings;
     
     private void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log("cyka blyat");
         if (other.collider.tag == "Flag") {
             winCanvas.SetActive(true);
             settings.SetActive(false);
